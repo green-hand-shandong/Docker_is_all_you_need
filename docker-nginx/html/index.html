@@ -1,0 +1,70 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>发送请求并显示返回的消息</title>
+  <script>
+    function sendRequest() {
+      var message = document.getElementById('message').value;
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '/api/hello?message=' + encodeURIComponent(message), true);
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          document.getElementById('response').textContent = xhr.responseText;
+        }
+      };
+      xhr.send();
+    }
+  </script>
+</head>
+<body>
+  <input type="text" id="message" placeholder="请输入消息">
+  <button onclick="sendRequest()">发送请求</button>
+  <div id="response"></div>
+</body>
+</html> -->
+
+
+<!-- 这里的代码是不包含任何 JavaScript 框架或库的纯 JavaScript 代码，以保持对浏览器的最大兼容性。同时，为了防止 XSS 攻击，我们使用了 encodeURIComponent() 方法来对用户输入的消息进行编码处理。 -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>发送请求并显示返回的消息</title>
+  <script>
+    function sendRequestA() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '/api/hello', true);
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          document.getElementById('responseA').textContent = xhr.responseText;
+        }
+      };
+      xhr.send();
+    }
+
+    function sendRequestB() {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '/api/hello', true);
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          document.getElementById('responseB').textContent = xhr.responseText;
+        }
+      };
+      xhr.send();
+    }
+  </script>
+</head>
+<body>
+  <h2>向后端服务器 A 发送请求</h2>
+  <button onclick="sendRequestA()">发送请求</button>
+  <div id="responseA"></div>
+
+  <h2>向后端服务器 B 发送请求</h2>
+  <button onclick="sendRequestB()">发送请求</button>
+  <div id="responseB"></div>
+</body>
+</html>

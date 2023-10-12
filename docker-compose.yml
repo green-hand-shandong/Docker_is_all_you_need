@@ -1,0 +1,37 @@
+# 注意： 
+# docker-vue -- dist
+# docker-node -- node1  node2
+    # 添加访问mysql、redis、rockerMQ的功能 
+    # 转换 nodejs-express 服务器为 
+        # spring
+        # flask  Django
+        # gin
+        # CppWebserver
+    # webrtc
+    # 深度学习算法
+# docker-nginx -- 部署dist 转发给node1和node2
+# docker-compose 管理单机上的所有容器
+# docker-swarm   管理多机上的所有容器
+# K8S 自动部署
+
+volumes:
+  data:
+
+services:
+  redis:                          # 服务1
+    image: redis:latest           # Docker仓库拉取最新版本的Redis映像
+    volumes:
+      - data:/data                # 将卷data映射到Redis容器中的/data目录。
+    ports:                        # host:Container  
+      - 6379:6379                 # 指定了Redis服务暴露给主机的端口号为6379，这使得我们可以从主机上连接到Redis服务。
+                                  # 当你在主机上执行docker-compose up命令启动容器时，
+                                  # 主机的6379端口将会与容器的6379端口进行绑定。
+                                  # 这样，当你在主机上访问6379端口时，请求将会被转发到容器内部的6379端口，
+                                  # 从而允许你与Redis服务进行通信。
+
+                                  # 当我们需要连接应用程序到Redis时，只需要使用redis://redis:6379的连接字符串即可。
+                                  # 使用Docker Compose可以简化项目中多个服务的部署，并且便于维护和扩展
+
+  myapp:                          # 服务2
+    image: [YOUR-APP-IMAGE]
+
